@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  web_agent:
+    build: .
+    container_name: web_agent
+    ports:
+      - "8000:8000"
+    environment:
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT:-https://openai-ragbot.openai.azure.com/}
+      - AZURE_OPENAI_API_VERSION=${AZURE_OPENAI_API_VERSION:-2024-12-01-preview}
+      - AZURE_DEPLOYMENT_NAME=${AZURE_DEPLOYMENT_NAME:-gpt-4.1-mini}
+      - AZURE_EMBEDDING_DEPLOYMENT_NAME=${AZURE_EMBEDDING_DEPLOYMENT_NAME:-text-embedding-3-small}
+      - SERPER_API_KEY=${SERPER_API_KEY}
+    volumes:
+      - ./mem0_chroma:/app/mem0_chroma
+    restart: unless-stopped
