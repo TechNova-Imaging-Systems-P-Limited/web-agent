@@ -6,6 +6,8 @@ services:
     container_name: web_agent
     ports:
       - "8015:8000"
+    networks:
+      - ai_agent_network
     environment:
       - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
       - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT:-https://openai-ragbot.openai.azure.com/}
@@ -16,3 +18,7 @@ services:
     volumes:
       - /home/technova/app/web_data:/app/data
     restart: unless-stopped
+
+networks:
+  ai_agent_network:
+    external: true
