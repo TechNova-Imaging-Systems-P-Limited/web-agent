@@ -39,10 +39,10 @@ mem0_config = {
         "provider": "chroma",
         "config": {
             "collection_name": "web_agent_memory",
-            "path": "d:/projects/web_agent/chroma_db"
+            "path": "/app/data/chroma_db"
         }
     },
-    "history_db_path": "d:/projects/web_agent/history.db" 
+    "history_db_path": "/app/data/history.db" 
 }
 
 m = Memory.from_config(mem0_config)

@@ -14,5 +14,5 @@ services:
       - AZURE_EMBEDDING_DEPLOYMENT_NAME=${AZURE_EMBEDDING_DEPLOYMENT_NAME:-text-embedding-3-small}
       - SERPER_API_KEY=${SERPER_API_KEY}
     volumes:
-      - ./mem0_chroma:/app/mem0_chroma
+      - /home/technova/app/web_data:/app/data
     restart: unless-stopped
