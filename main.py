@@ -45,5 +45,23 @@ async def history_endpoint(chat_request: ChatRequest):
     history = get_session_history(session_id)
     return {"history": history}
 
+class StripPrefixMiddleware:
+    def __init__(self, app, prefix):
+        self.app = app
+        self.prefix = prefix
+        
+    async def __call__(self, scope, receive, send):
+        if scope["type"] in ("http", "websocket"):
+            path = scope.get("path", "")
+            if path.startswith(self.prefix):
+                scope["path"] = path[len(self.prefix):]
+                if not scope["path"]:
+                    scope["path"] = "/"
+                scope["root_path"] = self.prefix
+        return await self.app(scope, receive, send)
+
+if app_root_path and app_root_path != "/":
+    app = StripPrefixMiddleware(app, app_root_path)
+
 if __name__ == "__main__":
     uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
