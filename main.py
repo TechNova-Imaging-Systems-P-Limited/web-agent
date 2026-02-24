@@ -10,7 +10,9 @@ import uuid
 
 from webagent import run_web_agent, get_session_history
 
-app = FastAPI()
+app_root_path = os.getenv("ROOT_PATH", "/web")
+
+app = FastAPI(root_path=app_root_path)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 

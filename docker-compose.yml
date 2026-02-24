@@ -15,6 +15,7 @@ services:
       - AZURE_DEPLOYMENT_NAME=${AZURE_DEPLOYMENT_NAME:-gpt-4.1-mini}
       - AZURE_EMBEDDING_DEPLOYMENT_NAME=${AZURE_EMBEDDING_DEPLOYMENT_NAME:-text-embedding-3-small}
       - SERPER_API_KEY=${SERPER_API_KEY}
+      - ROOT_PATH=/web
     volumes:
       - /home/technova/app/web_data:/app/data
     restart: unless-stopped
