@@ -8,3 +8,4 @@ jinja2
 python-multipart
 mem0ai
 requests
+chromadb
